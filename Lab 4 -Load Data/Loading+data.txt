@@ -1,8 +1,10 @@
-//Rename data base & creating the table + meta data
+//create database
 
-ALTER DATABASE FIRST_DB RENAME TO OUR_FIRST_DB; 
+CREATE DATABASE SANDEEP_DB ; 
 
-CREATE TABLE "OUR_FIRST_DB"."PUBLIC"."LOAN_PAYMENT" (
+//select database and warehouse and then craete table 
+
+CREATE TABLE "SANDEEP_DB"."PUBLIC"."LOAN_PAYMENT" (
   "Loan_ID" STRING,
   "loan_status" STRING,
   "Principal" STRING,
