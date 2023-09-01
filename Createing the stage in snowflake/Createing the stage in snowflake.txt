@@ -1,0 +1,51 @@
+ Createing the stage in snowflake
+------------------------------------------------------------------------------------------------------------------
+In Snowflake, a "stage" is a virtual location that serves as an intermediary for loading data into or unloading data from the Snowflake platform. Stages can be either internal or external:
+
+Internal Stage:
+********************************
+An internal stage is managed by Snowflake and is used for temporary storage of data files. It's an intermediate storage location for data being loaded into or unloaded from Snowflake.
+Internal stages are typically used for short-term data storage during data import or export operations.
+Internal stages are easy to create and don't require specifying a storage location since Snowflake manages them.
+
+
+Creating an Internal Stage:
+*********************************
+Log into Snowflake: Ensure that you are logged into your Snowflake account with the appropriate privileges to create a stage.
+
+Create the Stage: Use the CREATE STAGE statement to create an internal stage. You can specify optional parameters like file format, copy options, and encryption options.
+
+CREATE OR REPLACE STAGE my_internal_stage;
+-----------------------------------------------------------------------------------------------------------------------------------
+
+External Stage:
+********************************
+An external stage is used to access data stored externally in cloud-based object storage services like Amazon S3, Azure Blob Storage, or Google Cloud Storage.
+External stages require you to specify the location and credentials to access the external data source.
+They provide a way to access and query data stored outside of Snowflake without the need to physically move the data into Snowflake.
+
+Creating an External Stage:
+********************************
+Log into Snowflake: Ensure that you are logged into your Snowflake account with the necessary privileges.
+
+Create the External Stage: Use the CREATE EXTERNAL STAGE statement to create an external stage. You need to specify the URL of the external location and provide the necessary credentials to access it.
+
+CREATE OR REPLACE EXTERNAL STAGE my_external_stage
+URL = 's3://sandeep-bucket/test'
+CREDENTIALS = (
+  AWS_KEY_ID = '************'
+  AWS_SECRET_KEY = '*************'
+);
+		
+******Note********
+Replace 's3://your-bucket/path' with the actual URL of your external storage location.
+Replace 'your-access-key-id' and 'your-secret-key' with your AWS credentials for accessing the external storage.
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Verify Stage Creation: To verify that your stage has been created successfully, you can use the SHOW STAGES command:
+
+SHOW STAGES;
+This command will display a list of all stages in your Snowflake account, including the one you just created.
+
+****************************************************************************************************************************

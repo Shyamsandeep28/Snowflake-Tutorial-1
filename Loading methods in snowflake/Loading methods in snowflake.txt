@@ -1,0 +1,59 @@
+ Loading methods in snowflake
+*****************************************************
+Snowflake provides several methods for loading data into its platform, depending on your use case and data source. Here are the primary loading methods in Snowflake:
+
+Snowflake's COPY Command:
+*******************************
+COPY INTO: This is the most common method for loading data into Snowflake. You can use the COPY INTO command to load data from various file formats (e.g., CSV, Parquet, JSON) stored in an internal or external stage into Snowflake tables.
+
+						COPY INTO test-table
+						FROM @sandeep_stage
+						FILE_FORMAT = (TYPE = CSV);
+
+Snowpipe:
+******************************
+Snowpipe is a continuous data ingestion service provided by Snowflake. It automates the data loading process by monitoring a stage for new files and loading them into a specified table in real-time as soon as data arrives in the stage. Snowpipe is particularly useful for near real-time data ingestion.
+Example:
+
+					CREATE OR REPLACE PIPE my_pipe
+					AUTO_INGEST = TRUE
+					AS
+					COPY INTO test_table
+					FROM @sandeep_stage
+					FILE_FORMAT = (TYPE = CSV);
+
+
+External Tables:
+*******************************
+External tables in Snowflake allow you to query and access data stored in external data sources (e.g., S3, Azure Blob Storage) without physically moving the data into Snowflake. You define the schema and access metadata to interact with the data directly.
+Example:
+
+					CREATE OR REPLACE EXTERNAL TABLE test1_table
+					LOCATION = 's3://sandeep-bucket/data/'
+					FILE_FORMAT = (TYPE = csv);
+
+
+SQL INSERT Statements:
+*******************************
+You can also load data into Snowflake tables using standard SQL INSERT statements. This method is suitable for inserting data row-by-row or from another Snowflake table.
+Example:
+
+					INSERT INTO my_table (column1, column2)
+					VALUES ('value1', 'value2');
+
+
+Snowflake Data Sharing:
+*******************************
+Snowflake's data sharing feature allows you to share data between different Snowflake accounts securely. You can use data sharing to load data into another Snowflake account, which can then access the shared data without copying it.
+
+Third-Party ETL Tools
+*******************************
+You can leverage third-party ETL (Extract, Transform, Load) tools like Informatica, Talend, or Apache NiFi to load data into Snowflake. These tools often provide graphical interfaces for data integration and transformation.
+
+Bulk Loading Tools:
+*******************************
+For high-volume data loading, Snowflake provides SnowSQL, a command-line tool that can perform bulk data loading. You can also use Snowpipe for real-time bulk loading.
+
+REST API:
+*******************************
+Snowflake offers a REST API that allows programmatic access for data loading. You can use this API to automate data ingestion tasks.
