@@ -1,0 +1,88 @@
+Copy Command 
+*******************************************************
+The COPY command is a powerful and essential SQL command used to load data into Snowflake tables from various data sources. It's commonly used for bulk data loading and is particularly efficient for ingesting large volumes of data into your Snowflake data warehouse. The COPY command supports various data formats and sources, making it versatile for different data integration scenarios.
+
+Here's an overview of how the COPY command works in Snowflake:
+
+1. Syntax:
+The basic syntax of the COPY command is as follows:
+
+                COPY INTO <target_table> FROM <stage_or_file> [file_format = (<format_options>)] [options = (<copy_options>)];
+where 
+		<target_table>: The name of the Snowflake table where you want to load data.
+		<stage_or_file>: Specifies the source of the data. It can be a Snowflake stage or an external file (e.g., on a cloud 				storage service like Amazon S3, Azure Blob Storage, or Google Cloud Storage).
+		file_format: Specifies the file format of the data source, including options for handling different data formats like 			     CSV, JSON, Avro, Parquet, etc.
+		options: Optional parameters to configure various aspects of the data loading process, such as error handling, field 		delimiters, skipping header rows, and more.
+
+*****************************************************************************************************
+Data Formats:
+Snowflake supports various file formats for data loading, and you can specify the appropriate file format in the file_format parameter. Some common file formats include:
+
+CSV (Comma-Separated Values)
+JSON (JavaScript Object Notation)
+Parquet
+Avro
+ORC (Optimized Row Columnar)
+XML (Extensible Markup Language)
+
+*****************************************************************************************************
+Options:
+You can specify various options in the options parameter to customize the data loading process. Some commonly used options include:
+
+ON_ERROR: Determines how errors encountered during data loading should be handled (e.g., continue loading, skip, or abort).
+SKIP_HEADER: Specifies whether to skip a certain number of header rows in the source data.
+FIELD_OPTIONALLY_ENCLOSED_BY: Defines the character that optionally encloses fields in the source data.
+COPY_OPTIONS: Additional options to fine-tune the data loading process, such as specifying the number of parallel threads, date and time format, and more.
+****************************************************************************************************
+Loading Data from Stages:
+Snowflake uses stages as an intermediary step for data loading. You typically upload your data files to a Snowflake stage (internal or external), and then you reference that stage in the COPY command to load data into a target table.
+*****************************************************************************************************
+Permissions:
+To execute the COPY command, the user executing it must have appropriate privileges on the target table, the source stage or file, and the necessary file format.
+****************************************************************************************************
+
+
+Example 1: Copy Data from a Snowflake Stage
+
+In this example, I'll copy data from a Snowflake stage into a Snowflake table.
+  
+COPY INTO sandeep_table
+FROM @my_internal_stage/loan.csv
+FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1);
+******************************************************************************************************
+
+Example 2: Copy Data from an External Stage (Amazon S3)
+
+-- Copy data from an external stage (Amazon S3) to a Snowflake table
+COPY INTO sandeep1_table
+FROM @s3://bucketsnowflakes3/Loan_payments_data.csv
+FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1)
+CREDENTIALS = (AWS_KEY_ID = '***************************************' AWS_SECRET_KEY = '********************************');
+
+*********************************************************************************************************
+
+Example 3: Copy Data with Error Handling
+
+In this example, we'll copy data and specify how to handle errors during the loading process.
+
+
+COPY INTO sandeep1_table
+FROM @my_stage/loan.csv
+FILE_FORMAT = (TYPE = CSV SKIP_HEADER = 1)
+ON_ERROR = 'CONTINUE'; -- Continue loading even if errors occur
+Here ON_ERROR Specifies that the copy operation should continue loading data even if errors are encountered. Other options include 'ABORT' (stop loading on the first error) and 'SKIP_FILE' (skip the file with errors).
+
+**********************************************************************************************************
+Example 4: Copy Data with Custom Delimiter
+
+In this example, we'll copy data with a custom field delimiter (e.g., a pipe '|').
+
+COPY INTO deep_table
+FROM @my_stage/loan.txt
+FILE_FORMAT = (TYPE = CSV FIELD_OPTIONALLY_ENCLOSED_BY = '|');
+FIELD_OPTIONALLY_ENCLOSED_BY: Specifies the character that optionally encloses fields in the source data. In this case, it's set to '|'.
+
+
+
+
+
