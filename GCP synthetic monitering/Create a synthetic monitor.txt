@@ -1,0 +1,75 @@
+Create a synthetic monitor
+***************************************
+About synthetic monitors
+To create a synthetic monitor, you deploy single-purpose 2nd gen Cloud Function on Cloud Run and you select the execution frequency of the function. Cloud Monitoring periodically executes your Cloud Function, which results in your user-authored script being executed. Scripts must be written in Node.js.
+
+To create your Cloud Function, you can use an inline editor or you can upload a zip file. If you choose to use the inline editor, then you can start with a provided skeleton. After you create a synthetic monitor, Cloud Monitoring uses a scheduling system that schedules periodic execution of your Cloud Function. While you specify the region where your Cloud Function exists, the commands that triggers the execution can originate in any region supported by the uptime-check servers. For more information, see List uptime-check server IP addresses.
+
+For each synthetic monitor, Monitoring stores a history of execution results. These results include the following:
+
+A time series that records success or failure of executions over time. This data is written as an uptime_check/check_passed time series for a specific Cloud Run resource.
+
+When you create a synthetic monitor by using the Google Cloud console, you're prompted to create an alerting policy that monitors the check_passed metric type. This design ensures that you're notified when a test fails.
+
+If you use the Cloud Monitoring API to create a synthetic monitor, then you must issue a separate API command or use the Google Cloud console to create the alerting policy. You can create an alerting policy by using the Google Cloud console or the Google Cloud CLI. However, we recommend that you use the Google Cloud console because most alerting policy fields are populated for you.
+
+A time series that records the execution duration of the code. The execution time of the function isn't recorded. The latency data is written as an uptime_check/request_latency time series for a specific Cloud Run resource. A chart of this data is provided on the Synthetic monitor details page.
+
+Logs that contain information about the test and failure details:
+
+If you use the Mocha framework, then the logs include information about whether the test passed or failed, test duration, and, in the case of failure, a full stack trace. The stack trace includes the line of code that failed, error types, and error messages.
+
+If your tests don't rely on a framework, then the logs include the test script, and in the case of failure, a full stack trace. The stack trace includes the line of code that failed, error types, and error messages.
+
+For each Cloud Function, Cloud Functions collects metrics and logs. The metrics include the number of executions per second, execution time, and memory utilization. For information about how to view execution results
+******************************************************************************************************************************
+
+
+Before you begin
+To get the permissions that you need to view and modify synthetic monitors by using the Google Cloud console, ask your administrator to grant you the following IAM roles on your project:
+
+Monitoring Editor (roles/monitoring.editor)
+Cloud Functions Developer (roles/cloudfunctions.developer)
+For more information about granting roles, see Manage access.
+
+You might also be able to get the required permissions through custom roles or other predefined roles.
+
+Ensure that you have a service account that can be used by the runtime environment.
+
+To view the service accounts in your project, go to the Service Accounts page:
+
+******************************************************************************************
+
+Ensure the following APIs are enabled:
+
+Cloud Monitoring API
+Artifact Registry API
+Cloud Build API
+Cloud Functions API
+Cloud Logging API
+Pub/Sub API
+Cloud Run Admin API
+To view the enabled APIs in your project, go to the APIs & Services page:
+**********************************************************************************************
+
+Create a synthetic monitor
+
+When you create a synthetic monitor by using the Google Cloud console, a new Cloud Function (2nd gen) is deployed and the monitor for that Cloud Function is created. You can't create a synthetic monitor that monitors an existing Cloud Function.
+
+In the Google Cloud console, select Monitoring, and then select  Synthetic monitoring, or click the following button:
+
+Go to Synthetic monitoring
+
+Select Create Synthetic Monitor.
+Enter a name for the monitor.
+Optional: Update the Response Timeout, the Check Frequency, and add user-defined labels.
+Click Create Function to create a Cloud Function.
+
+If prompted, then enable the required APIs.
+Enter a display name and select a region. Names must be unique within a region.
+In the Runtime, build, connections and security settings section, do the following:
+
+Review the default settings and update them when necessary.
+
+Note: The default settings for the allocated memory, CPU, and security might not be sufficient.
+In the Runtime service account field, select a service account. If you don't have a service account available, then create one.

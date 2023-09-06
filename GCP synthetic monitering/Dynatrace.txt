@@ -1,0 +1,76 @@
+DynaTrace Software is an Application Performance Monitoring tool (APM) ,Which is widely used nowadays .It comes with advanced features for monitoring Java. Through which we can easily identify the performance of our application.
+We are using it to discover the existence of abnormalities in CPU Performance, response time, transaction rate, throughput and system usage.It has helped to diagnose and fix many performance issues at an early stage and make our application more value able.
+How does it work
+Dynatrace server should be installed on your system and it consists of host and agent . It has a dashboard through which we can diagnose our system on one place.
+Our server can easily interact with other agent if we want , for that we have to run some command through terminal and then we can easily watch the user interaction and also we can customize the time.
+Benefits of Dyntrace
+•	For Testing you should have lot of data and through which you can check your system health such as CPU, Memory, Disk and Network Utilization,Storage Problems
+•	We can also look into the problem which are captured in dynatrace and then we can resolve those.
+•	With the help of Dynatrace, developers and testers can ensure that their application works fast and is reliable.
+•	We can capture the issues before client complains about the same.
+
+Managed components
+The basic Dynatrace Managed components are illustrated in the image below.
+Dynatrace Managed cluster
+Your Dynatrace Managed cluster is responsible for monitoring one or more environments. It includes at least one node with Dynatrace Server installed (typically you create more than one node in a cluster). Each Dynatrace Managed cluster is associated with one Cluster Management Console. Thus, each Dynatrace Managed cluster is associated with:
+•	One or more nodes (and therefore one or more Dynatrace Server instances)
+•	One or more monitored environments (and therefore one or more instances of Dynatrace OneAgent)
+•	One Cluster Management Console
+Each time you want to set up a new cluster, you need to obtain a license. All your Dynatrace Managed clusters communicate with Mission Control for maintenance and licensing issues.
+Dynatrace Managed installer
+The Dynatrace Managed installer provides all the conveniences offered by the Dynatrace cloud on your own infrastructure and enables the monitoring of application services, processes, and on-premises infrastructure. The Dynatrace Managed installer is comprised of the following components:
+•	Dynatrace Server
+•	Cassandra
+•	Elasticsearch
+•	An embedded ActiveGate
+•	NGINX
+All of the components listed are deployed on the first node that you create when setting up your cluster, as well as on any additional node.
+Cluster Management Console
+For each Dynatrace Managed cluster you set up, there is a dedicated Cluster Management Console. Cluster Management Console is a web-based user interface for efficiently managing your Dynatrace Managed infrastructure. From here you can view the deployment status of your Dynatrace Managed cluster setup at any time.
+
+With the Cluster Management Console, you can:
+•	Create user accounts and groups
+•	Add new cluster nodes
+•	Add new monitoring environments
+Mission Control
+Dynatrace Mission Control provides pro-active support for maintenance and licensing issues. With automated support from our Dynatrace ONE team, your Dynatrace Managed installation is updated automatically. You can reach out to our Dynatrace ONE team through real-time, in-product assistance if you need help or encounter any issues.
+Dynatrace OneAgent
+Dynatrace OneAgent is installed on each monitored environment. Dynatrace OneAgent is responsible for collecting all performance data within your monitored environment and sending the data to Dynatrace Server.
+
+*************************************************************************************************************************************
+
+
+Dynatrace is a popular application performance monitoring (APM) and observability platform designed to help organizations monitor and optimize the performance of their applications and infrastructure in real-time. It provides deep insights into the performance of applications, microservices, cloud environments, and user experiences, enabling teams to identify and resolve performance issues quickly.
+
+One of the features offered by Dynatrace is synthetic monitoring. Synthetic monitoring involves simulating user interactions with an application or website from various locations and devices to proactively detect performance problems before real users are affected. Here are the steps to perform synthetic monitoring using Dynatrace:
+
+Set Up a Dynatrace Account:
+
+If you don't already have a Dynatrace account, sign up for one on their website and follow the setup instructions.
+Install Dynatrace Agent:
+
+Install the Dynatrace agent on your application servers or cloud instances to collect performance data. This step is essential for monitoring the real user experience.
+Create a Synthetic Monitor:
+
+Log in to your Dynatrace account and navigate to the Synthetic tab.
+Define Monitor Configuration:
+***********************************
+Create a new synthetic monitor and configure its settings. You can specify details such as the target URL, locations from which you want to perform synthetic tests, frequency of tests, and the type of browser or device to simulate.
+Select the Test Type:
+
+Choose the type of synthetic test you want to perform. Dynatrace offers several options, including simple availability tests, multi-step web checks, and more complex scripted browser tests. The choice depends on your monitoring goals.
+Configure Test Steps:
+
+If you're performing a multi-step or scripted browser test, define the test steps. This may involve simulating user interactions like clicking buttons, filling out forms, or navigating through your application.
+Set Up Alerting:
+
+Configure alerting rules to be notified when the synthetic monitor detects performance issues, such as slow response times or errors.
+Run and Monitor:
+
+Activate the synthetic monitor, and Dynatrace will start running tests based on your configuration. You can view the results and performance data in real-time on the Dynatrace dashboard.
+Analyze and Optimize:
+
+Use the data and insights gathered from synthetic monitoring to analyze the performance of your application and identify areas for optimization. Dynatrace provides detailed metrics and reports to help you pinpoint issues.
+Automate Actions:
+
+You can also set up automated actions, such as triggering scripts or workflows, based on specific conditions or alert thresholds detected during synthetic monitoring.
